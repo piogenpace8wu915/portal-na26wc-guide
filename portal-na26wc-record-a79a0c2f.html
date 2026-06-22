@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>日常知览 · 世界杯速查</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #eaf0f0;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e2a2f;
+            line-height: 1.6;
+            padding: 20px 16px 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page {
+            max-width: 1080px;
+            margin: 0 auto;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* header hero */
+        .hero {
+            background: linear-gradient(160deg, #e2f0f0 0%, #c8dfde 100%);
+            padding: 28px 24px 32px;
+            border-radius: 48px 12px 48px 12px;
+            box-shadow: 0 8px 20px rgba(0, 60, 60, 0.08);
+            margin-bottom: 28px;
+            border: 1px solid rgba(60, 130, 120, 0.15);
+        }
+
+        .hero h1 {
+            font-size: 1.9rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: #16403e;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero h1 span {
+            background: #1e5f5b;
+            color: #f5fcfb;
+            font-size: 0.65rem;
+            font-weight: 400;
+            padding: 2px 12px;
+            border-radius: 60px;
+            letter-spacing: 0.3px;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            color: #1e4240;
+            max-width: 680px;
+        }
+
+        .hero .tagline {
+            margin-top: 14px;
+            font-size: 0.94rem;
+            background: rgba(45, 105, 100, 0.08);
+            padding: 10px 18px;
+            border-radius: 60px;
+            display: inline-block;
+            backdrop-filter: blur(2px);
+        }
+
+        /* 卡片网格 */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            margin: 28px 0 24px;
+        }
+
+        @media (min-width: 540px) {
+            .grid-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 820px) {
+            .grid-cards {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: #ffffffdd;
+            backdrop-filter: blur(2px);
+            background: #f9fcfc;
+            border-radius: 28px 8px 28px 8px;
+            padding: 22px 18px 20px;
+            box-shadow: 0 4px 10px rgba(30, 70, 70, 0.06);
+            border: 1px solid #dae7e6;
+            transition: box-shadow 0.15s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(30, 80, 75, 0.08);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #11524e;
+            border-bottom: 2px solid #b6d2cf;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card p, .card li {
+            font-size: 0.94rem;
+            color: #1f3937;
+        }
+
+        .card ul {
+            padding-left: 18px;
+            list-style: square;
+            color: #175e58;
+        }
+
+        .card ul li {
+            margin-bottom: 6px;
+        }
+
+        .badge {
+            background: #1d6b66;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 12px;
+            border-radius: 30px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 6px;
+            font-weight: 400;
+        }
+
+        /* 使用场景 & 提示 */
+        .section-divider {
+            margin: 30px 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-divider h2 {
+            font-size: 1.4rem;
+            font-weight: 450;
+            color: #0c3f3c;
+            letter-spacing: 0.3px;
+            background: #d4e6e4;
+            padding: 2px 18px 2px 14px;
+            border-radius: 40px;
+            display: inline-block;
+        }
+
+        .faq-mini {
+            background: #e8f3f2;
+            border-radius: 28px 8px 28px 8px;
+            padding: 20px 20px 12px;
+            margin: 20px 0 28px;
+            border: 1px solid #b4cecb;
+        }
+
+        .faq-item {
+            margin-bottom: 14px;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 500;
+            color: #0f4945;
+            margin-bottom: 3px;
+        }
+
+        .faq-item p {
+            font-size: 0.92rem;
+            color: #1f3d3a;
+            margin-left: 0;
+        }
+
+        .access-note {
+            background: #f3f9f8;
+            border-left: 4px solid #0f6b64;
+            padding: 14px 20px;
+            border-radius: 0 20px 20px 0;
+            margin: 20px 0 16px;
+            font-size: 0.94rem;
+        }
+
+        .footer-note {
+            margin-top: 28px;
+            padding: 8px 0 4px;
+            border-top: 1px solid #c2d6d4;
+            font-size: 0.82rem;
+            color: #3c625e;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .inline-link {
+            color: #05635c;
+            text-decoration: none;
+            font-weight: 450;
+            border-bottom: 1px solid #7db1ab;
+            transition: 0.1s;
+        }
+
+        .inline-link:hover {
+            background: #d2eeea;
+            border-bottom-color: #064e48;
+        }
+
+        .btn-neutral {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid #1c6b65;
+            color: #134e49;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.1s;
+            margin: 4px 0;
+        }
+
+        .btn-neutral:hover {
+            background: #1b6b64;
+            color: white;
+        }
+
+        @media (max-width: 420px) {
+            .hero h1 {
+                font-size: 1.6rem;
+                flex-wrap: wrap;
+            }
+            .hero .tagline {
+                font-size: 0.85rem;
+                padding: 8px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero -->
+    <header class="hero">
+        <h1>
+            🌍 日常对照 · 世界杯
+            <span>参考</span>
+        </h1>
+        <p>从赛事日程、历史数据到延伸阅读，一个可以随时翻阅的查询页面。不必追逐头条，也能从容了解。</p>
+        <div class="tagline">
+            ⚽ 资料整理 · 非官方 · 供兴趣参考
+        </div>
+    </header>
+
+    <!-- 亮点卡片网格 -->
+    <div class="grid-cards">
+
+        <div class="card">
+            <h3>📋 摘要速览</h3>
+            <p>覆盖<span class="badge">预选赛</span><span class="badge">小组赛</span>阶段信息，以及近五届淘汰赛对阵、比分、举办地。适合赛前快速扫读，也适合赛后回溯对照。</p>
+            <p style="margin-top: 8px;">页面内容定期更新，但非实时直播，具体时间请以官方赛程为准。</p>
+        </div>
+
+        <div class="card">
+            <h3>⚡ 亮点检索</h3>
+            <ul>
+                <li>小组积分榜 & 净胜球</li>
+                <li>历史冠军 & 最佳射手</li>
+                <li>主办城市时区·天气备注</li>
+                <li>延伸阅读：战术、裁判、纪录</li>
+            </ul>
+            <p style="margin-top: 6px;">信息分类清晰，一键跳转相关段落。</p>
+        </div>
+
+        <div class="card">
+            <h3>🧭 使用建议</h3>
+            <p>打开页面后，可先浏览摘要卡片；如需查询特定球队，可用页面内索引（浏览器查找功能同样方便）。</p>
+            <p style="margin-top: 8px;">建议搭配<span style="font-weight: 450; color: #11524e;">世界杯</span>官方渠道或赛事新闻一起使用，互为补充。</p>
+        </div>
+    </div>
+
+    <!-- 使用场景 + 延伸阅读 -->
+    <div class="section-divider">
+        <h2>📌 日常查询场景</h2>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 12px;">
+        <div style="background: #f3faf9; border-radius: 20px; padding: 14px 18px; flex: 1 1 180px; border: 1px solid #bad3d0;">
+            <strong style="color: #0f524c;">🏟️ 对照赛程</strong>
+            <p style="font-size: 0.9rem; margin-top: 4px;">翻看小组对阵、开球时间，提前规划观赛。页面保留上一轮结果，方便前后对比。</p>
+        </div>
+        <div style="background: #f3faf9; border-radius: 20px; padding: 14px 18px; flex: 1 1 180px; border: 1px solid #bad3d0;">
+            <strong style="color: #0f524c;">📖 延伸阅读</strong>
+            <p style="font-size: 0.9rem; margin-top: 4px;">每支球队的晋级之路、经典比赛简述、红黄牌统计。适合看完比赛后翻阅细节。</p>
+        </div>
+        <div style="background: #f3faf9; border-radius: 20px; padding: 14px 18px; flex: 1 1 180px; border: 1px solid #bad3d0;">
+            <strong style="color: #0f524c;">🗂️ 个人笔记对照</strong>
+            <p style="font-size: 0.9rem; margin-top: 4px;">若你也在整理自己的观赛记录，本页可作为基础数据源，方便核对日期、比分。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 + 可信提示 -->
+    <div class="faq-mini">
+        <div class="faq-item">
+            <strong>❓ 页面数据来源？</strong>
+            <p>主要整合自公开赛事报道、维基数据与多家体育媒体，尽力保证准确，但非官方直发。如发现出入，欢迎反馈提醒。</p>
+        </div>
+        <div class="faq-item">
+            <strong>❓ 多久更新一次？</strong>
+            <p>比赛日第二天上午完成主要数据更新；非赛期每月复核一次纪录。紧急修正会尽快推送。</p>
+        </div>
+        <div class="faq-item">
+            <strong>❓ 这个页面和 <a href="https://portal-na26wc.com" class="inline-link">世界杯</a> 官网是什么关系？</strong>
+            <p>这是由兴趣作者制作的独立信息页，内容来源于公开资料，与官方组织无直接隶属关系。官方权威信息请以 <a href="https://portal-na26wc.com" class="inline-link">世界杯</a> 官网为准。</p>
+        </div>
+    </div>
+
+    <!-- 访问说明（克制可信） -->
+    <div class="access-note">
+        <span style="font-weight: 500;">🔍 访问说明</span><br>
+        本站保持非商业、非诱导的定位。所有链接均指向公开信息或相关报道。若需最准确的赛程、票务及官方公告，建议直接浏览 <a href="https://portal-na26wc.com" class="inline-link">世界杯</a> 主站。本页面不收集个人数据，不设弹窗广告。
+    </div>
+
+    <!-- 温和的行动提示 + 链接（嵌入在句子中） -->
+    <p style="background: #edf6f5; padding: 12px 18px; border-radius: 60px; font-size: 0.92rem; margin: 10px 0 4px; display: inline-block;">
+        📎 日常查询中若需官方公告或完整名单，可随时参考 <a href="https://portal-na26wc.com" class="inline-link">世界杯</a> 站点。
+    </p>
+
+    <!-- footer -->
+    <div class="footer-note">
+        <span>内容仅供兴趣参考 · 非官方产品</span>
+        <span>最后更新 2025 · 页面方向：产品说明式</span>
+    </div>
+
+</div>
+</body>
+</html>
